@@ -32,8 +32,8 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_TOKEN }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
@@ -49,8 +49,8 @@ jobs:
         build-args: UTIL_LINUX_VER=${{ steps.get_util_linux.outputs.version }}
         platforms: linux/amd64,linux/arm64
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/nsenter:${{ steps.get_util_linux.outputs.version }}
-          ${{ secrets.DOCKER_USERNAME }}/nsenter:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/nsenter:${{ steps.get_util_linux.outputs.version }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/nsenter:latest
           ghcr.io/${{ github.repository_owner }}/nsenter:${{ steps.get_util_linux.outputs.version }}
           ghcr.io/${{ github.repository_owner }}/nsenter:latest
         push: true
